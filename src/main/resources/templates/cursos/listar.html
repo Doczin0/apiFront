@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Cursos</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-950 text-gray-100 font-sans min-h-screen flex flex-col items-center justify-center py-10">
+
+<div class="w-full max-w-4xl px-4">
+    <!-- Título principal em roxo igual ao Figma -->
+    <h1 class="text-3xl font-bold text-violet-500 mb-8 text-center">Cursos</h1>
+
+    <!-- Tabela com fundo escuro -->
+    <div class="bg-zinc-900 shadow-xl rounded-lg overflow-hidden border border-zinc-800 mb-6">
+        <table class="min-w-full leading-normal">
+            <thead>
+            <tr class="bg-violet-600 text-white uppercase text-xs tracking-wider">
+                <th class="py-3 px-6 text-left">Curso</th>
+                <th class="py-3 px-6 text-left">Categoria</th>
+                <th class="py-3 px-6 text-left">Professor(a)</th>
+                <th class="py-3 px-6 text-center">Ativo</th>
+                <th class="py-3 px-6 text-center">Ações</th>
+            </tr>
+            </thead>
+            <tbody class="text-zinc-300 text-sm divide-y divide-zinc-800">
+            <tr th:each="curso : ${cursos}" class="hover:bg-zinc-800/50 transition">
+                <td class="py-4 px-6 whitespace-nowrap font-medium text-white" th:text="${curso.name}">Nome</td>
+                <td class="py-4 px-6" th:text="${curso.category}">Categoria</td>
+                <td class="py-4 px-6" th:text="${curso.professor}">Professor</td>
+                <td class="py-4 px-6 text-center">
+                            <span th:text="${curso.active} ? 'Sim' : 'Não'"
+                                  th:class="${curso.active} ? 'text-green-400 font-semibold' : 'text-red-400 font-semibold'">
+                            </span>
+                </td>
+                <td class="py-4 px-6 text-center">
+                    <a th:href="@{/cursos/{id}(id=${curso.id})}" class="text-violet-400 hover:text-violet-300 font-semibold">Ver Detalhes</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botão Novo Curso centralizado em roxo -->
+    <div class="flex justify-center">
+        <a th:href="@{/cursos/novo}" class="bg-violet-600 hover:bg-violet-700 text-white font-semibold px-6 py-2.5 rounded-md shadow transition duration-200">
+            Novo curso
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

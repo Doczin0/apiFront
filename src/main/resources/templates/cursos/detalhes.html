@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizar curso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-950 text-gray-100 font-sans min-h-screen flex flex-col items-center justify-center">
+
+<h1 class="text-3xl font-bold text-violet-500 mb-8">Cursos</h1>
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl w-full max-w-md overflow-hidden">
+
+    <!-- Cabeçalho Roxo igual ao Figma -->
+    <div class="bg-violet-600 px-6 py-4 text-white font-bold text-lg" th:text="${curso.name}">
+        Nome do Curso
+    </div>
+
+    <div class="p-6 space-y-3">
+        <div>
+            <span class="text-zinc-500 text-xs uppercase font-bold">Curso: </span>
+            <span class="text-sm text-white font-medium" th:text="${curso.name}">Nome</span>
+        </div>
+
+        <div>
+            <span class="text-zinc-500 text-xs uppercase font-bold">Categoria: </span>
+            <span class="text-sm text-zinc-300" th:text="${curso.category}">Categoria</span>
+        </div>
+
+        <div>
+            <span class="text-zinc-500 text-xs uppercase font-bold">Professor(a): </span>
+            <span class="text-sm text-zinc-300" th:text="${curso.professor}">Professor</span>
+        </div>
+
+        <div>
+            <span class="text-zinc-500 text-xs uppercase font-bold">Ativo: </span>
+            <span class="text-sm font-semibold" th:text="${curso.active} ? 'Sim' : 'Não'"
+                  th:class="${curso.active} ? 'text-green-400 font-semibold text-sm' : 'text-red-400 font-semibold text-sm'">
+                </span>
+        </div>
+    </div>
+</div>
+
+<!-- Botões abaixo do card igualzinho ao Figma -->
+<div class="flex space-x-4 mt-6">
+    <a th:href="@{/cursos/editar/{id}(id=${curso.id})}" class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2.5 rounded-md text-sm font-semibold transition shadow">
+        Editar curso
+    </a>
+    <a th:href="@{/cursos/deletar/{id}(id=${curso.id})}"
+       class="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-md text-sm font-semibold transition shadow"
+       onclick="return confirm('Tem certeza que deseja excluir este curso?');">
+        Excluir curso
+    </a>
+</div>
+
+<div class="mt-4">
+    <a th:href="@{/cursos}" class="text-zinc-400 hover:text-white text-sm">Voltar para a lista</a>
+</div>
+
+</body>
+</html>
